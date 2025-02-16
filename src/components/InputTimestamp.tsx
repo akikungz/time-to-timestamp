@@ -7,7 +7,7 @@ export default function InputTimestamp(
     }
 ) {
     return (
-        <div className="flex flex-row justify-center items-center gap-2 py-1 w-full">
+        <div className="flex flex-row justify-center items-center gap-2 w-full">
             <input
                 type="text"
                 className="border border-gray-300 p-2 rounded text-black w-1/3"

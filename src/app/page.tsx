@@ -39,19 +39,34 @@ export default function Home() {
             </span>
           </div>
         </div>
-        <span className="w-full text-start -mb-2 mt-1">Timestamp list</span>
+        <span className="w-full text-start -mb-1 mt-1">Timestamp list</span>
         {[...Array(inputCount)].map((_, index) => (
-          <InputTimestamp
-            key={index}
-            timestampInput={inputTemp[index]}
-            setTimestampInput={(timestampInput: TimestampInput) => {
-              setInputTemp((prev) => {
-                const next = [...prev];
-                next[index] = timestampInput;
-                return next;
-              });
-            }}
-          />
+          <div className="flex flex-row gap-2 justify-center items-center w-full" key={index}>
+            <InputTimestamp 
+              key={index}
+              timestampInput={inputTemp[index]}
+              setTimestampInput={(timestampInput) => {
+                setInputTemp((prev) => {
+                  const newInputTemp = [...prev];
+                  newInputTemp[index] = timestampInput;
+                  return newInputTemp;
+                });
+              }}
+            />
+            <button 
+              className="text-white font-bold rounded"
+              onClick={() => {
+                setInputCount(inputCount - 1);
+                setInputTemp((prev) => {
+                  const newInputTemp = [...prev];
+                  newInputTemp.splice(index, 1);
+                  return newInputTemp;
+                });
+              }}
+            >
+              🗑️
+            </button>
+          </div>
         ))}
         <div className="flex flex-row justify-center items-center gap-2 w-full">
           <button 
