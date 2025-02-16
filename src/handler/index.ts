@@ -46,10 +46,12 @@ export const clearHandler = (
     setInputCount: (inputCount: number) => void,
     setInputTemp: (inputTemp: TimestampInput[]) => void,
     setStartTime: (startTime: string) => void,
+    setExportText: (exportText: string | undefined) => void,
 ) => {
     setInputCount(0);
     setInputTemp([]);
     setStartTime("");
+    setExportText(undefined);
 }
 
 export const addHandler = (
