@@ -40,6 +40,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dist
+          path: dist
     
   deploy:
     name: Deploy to Github Pages
@@ -53,9 +54,5 @@ jobs:
         with:
           name: dist
 
-      - name: Deploy to Github Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: dist
+      - name: Checkout to gh-pages branch
+        run: git checkout -b gh-pages
