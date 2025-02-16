@@ -36,15 +36,8 @@ jobs:
       - run: pnpm install
       - run: pnpm build
 
-      - name: Fix permissions
-        run: |
-            chmod -c -R +rX "./dist" | while read line; do
-            echo "::warning title=Invalid file permissions automatically fixed::$line"
-            done
-
       - name: Checkout to gh-pages branch
-        run: |
-            git checkout gh-pages
-            git add .
-            git commit -m "Deploy to gh-pages"
-            git push
+        uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+          token: ${{ secrets.GITHUB_TOKEN }}
