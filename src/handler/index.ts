@@ -9,19 +9,16 @@ export const exportHandler = (
     // Clipboard API
     const text = inputTemp
         .map((timestamp) => ({ time: getSeconds(timestamp.time), title: timestamp.title }))
+        .filter((timestamp) => timestamp.title.length != 0)
         .map((timestamp) => {
             if (timestamp.time === undefined) return "";
             return `${formatSeconds(timestamp.time - optStartTime)} - ${timestamp.title}`;
         })
         .join("\n");
 
-    navigator.clipboard.writeText(text)
-        .then(() => {
-            alert(text);
-        })
-        .catch(() => {
-            alert("Failed to copy");
-        });
+    navigator.clipboard.writeText(text);
+    
+    return text;
 }
 
 export const loadHandler = (

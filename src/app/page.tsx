@@ -12,6 +12,8 @@ export default function Home() {
   const [startTime, setStartTime] = useState("");
   const optStartTime = getSeconds(startTime);
 
+  const [exportText, setExportText] = useState<string | undefined>();
+
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <div className="gap-2 flex flex-col justify-center items-center p-4 max-w-lg w-full">
@@ -74,11 +76,24 @@ export default function Home() {
           </button>
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
-            onClick={() => exportHandler(inputTemp, optStartTime)}
+            onClick={() => setExportText(exportHandler(inputTemp, optStartTime))}
           >
             Export
           </button>
         </div>
+
+        {
+          exportText && (
+            <div className="flex flex-col gap-2 justify-center items-start w-full mt-4">
+              <span>Export Preview</span>
+              <div className="border border-gray-300 p-2 rounded text-white w-full">
+                { exportText?.split("\n").map((line, index) => (
+                  <div key={index}>{line}</div>
+                )) }
+              </div>
+            </div>
+          )
+        }
       </div>
     </div>
   );
