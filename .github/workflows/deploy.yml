@@ -54,5 +54,11 @@ jobs:
         with:
           name: dist
 
-      - name: Checkout to gh-pages branch
-        run: git checkout -b gh-pages
+      - name: Deploy to Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          enable_jekyll: false
+          clean: true
