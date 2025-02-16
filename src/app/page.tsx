@@ -3,7 +3,7 @@ import InputTimestamp from "@/components/InputTimestamp";
 import { addHandler, clearHandler, exportHandler, loadHandler, saveHandler } from "@/handler";
 import type { TimestampInput } from "@/types";
 import { getSeconds } from "@/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [inputCount, setInputCount] = useState(0);
@@ -13,6 +13,12 @@ export default function Home() {
   const optStartTime = getSeconds(startTime);
 
   const [exportText, setExportText] = useState<string | undefined>();
+
+  useEffect(() => {
+    if (inputTemp.length > 0 && optStartTime !== undefined) {
+      setExportText(exportHandler(inputTemp, optStartTime));
+    } 
+  }, [inputTemp]);
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
@@ -76,7 +82,12 @@ export default function Home() {
           </button>
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
-            onClick={() => setExportText(exportHandler(inputTemp, optStartTime))}
+            onClick={() => {
+              if (exportText) {
+                navigator.clipboard.writeText(exportText);
+                alert("Exported to clipboard");
+              }
+            }}
           >
             Export
           </button>

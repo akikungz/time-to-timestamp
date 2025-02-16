@@ -15,9 +15,6 @@ export const exportHandler = (
             return `${formatSeconds(timestamp.time - optStartTime)} - ${timestamp.title}`;
         })
         .join("\n");
-
-    navigator.clipboard.writeText(text);
-    
     return text;
 }
 
