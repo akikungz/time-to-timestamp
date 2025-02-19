@@ -100,11 +100,11 @@ export default function Home() {
             onClick={() => {
               if (exportText) {
                 navigator.clipboard.writeText(exportText);
-                alert("Exported to clipboard");
+                alert("Copy to clipboard");
               }
             }}
           >
-            Export
+            Copy
           </button>
         </div>
 
